@@ -1,5 +1,5 @@
 import Wrapper from '../shared/components/Wrapper';
-import Form from '../shared/components/Form';
+import Form from 'ui/organisms/Form';
 import { AuthInputsForm, authSchema } from '../shared/constants';
 import { useAuth } from '../shared/store';
 

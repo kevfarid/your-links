@@ -13,10 +13,12 @@ export default function AuthForm({
   schema,
   error,
   setError,
+  showTitle = true,
 }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, touchedFields, dirtyFields },
   } = useForm({
     resolver: yupResolver(schema),
@@ -31,7 +33,7 @@ export default function AuthForm({
   return (
     <Box
       component='form'
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((data) => onSubmit(data, reset))}
       width='100%'
       maxWidth='22rem'
       flexDirection='column'
@@ -40,15 +42,17 @@ export default function AuthForm({
       display='flex'
       marginTop='3.125rem'
     >
-      <Typography
-        variant='h5'
-        component='h2'
-        fontWeight={700}
-        textAlign='start'
-        marginBottom='0.6rem'
-      >
-        {title}
-      </Typography>
+      {showTitle && (
+        <Typography
+          variant='h5'
+          component='h2'
+          fontWeight={700}
+          textAlign='start'
+          marginBottom='0.6rem'
+        >
+          {title}
+        </Typography>
+      )}
       {inputs.map((input) => {
         const { name, label, type } = input;
         return (
@@ -98,4 +102,9 @@ AuthForm.propTypes = {
   schema: PropTypes.object.isRequired,
   setError: PropTypes.func,
   error: PropTypes.string,
+  showTitle: PropTypes.bool,
+};
+
+AuthForm.defaultProps = {
+  showTitle: true,
 };

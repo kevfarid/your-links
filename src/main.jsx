@@ -10,6 +10,7 @@ import './main.css';
 
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
+import Links from './features/links/Links';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: 'register',
     element: <Register />,
+  },
+  {
+    path: '/',
+    element: <Links />,
   },
 ]);
 

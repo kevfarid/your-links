@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import {resolve} from 'path';
+import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +10,7 @@ export default defineConfig({
       ui: resolve(__dirname, 'src/features/ui'),
       core: resolve(__dirname, 'src/core'),
       features: resolve(__dirname, 'src/features'),
+      assets: resolve(__dirname, 'src/assets'),
     },
   },
 });

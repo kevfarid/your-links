@@ -2,27 +2,19 @@ import axios from 'axios';
 
 const Axios = axios.create({
   baseURL: 'http://ec2-54-160-84-172.compute-1.amazonaws.com:3000',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-Axios.interceptors.request.use(
-  (config) => {
-    const { state } = JSON.parse(localStorage.getItem('login') || '{}');
+// Axios.interceptors.request.use(function (config) {
+//   const token = localStorage.getItem('token') || '';
 
-    let { headers } = config;
+//   if (token) {
+//     config.headers.authorization = `Bearer ${token}`
+//   }
 
-    if (state.token) {
-      headers = {
-        ...headers,
-        Authorization: `Token ${state.token}`,
-      };
-    }
-
-    return {
-      ...config,
-      headers,
-    };
-  },
-  (error) => Promise.reject(error)
-);
+//   return config;
+// });
 
 export default Axios;
