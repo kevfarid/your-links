@@ -16,6 +16,12 @@ const theme = createTheme({
           lineHeight: '1.5rem',
           textTransform: 'none',
         },
+        outlined: {
+          paddingTop: '7px',
+          paddingBottom: '6px',
+          paddingLeft: '24px',
+          paddingRight: '24px',
+        },
       },
     },
     MuiTypography: {

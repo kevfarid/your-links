@@ -1,12 +1,19 @@
 import PropTypes from 'prop-types';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Alert } from '@mui/material';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Input from 'ui/molecules/Input';
 
-export default function AuthForm({ onSubmit, inputs, title, schema }) {
+export default function AuthForm({
+  onSubmit,
+  inputs,
+  title,
+  schema,
+  error,
+  setError,
+}) {
   const {
     register,
     handleSubmit,
@@ -55,6 +62,15 @@ export default function AuthForm({ onSubmit, inputs, title, schema }) {
           />
         );
       })}
+      {error && (
+        <Alert
+          onClose={() => setError && setError('')}
+          severity='error'
+          sx={{ width: '100%' }}
+        >
+          {error}
+        </Alert>
+      )}
       <Button
         variant='contained'
         fullWidth
@@ -80,4 +96,6 @@ AuthForm.propTypes = {
     })
   ).isRequired,
   schema: PropTypes.object.isRequired,
+  setError: PropTypes.func,
+  error: PropTypes.string,
 };

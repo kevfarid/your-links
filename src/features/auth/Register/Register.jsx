@@ -1,6 +1,10 @@
 import Wrapper from '../shared/components/Wrapper';
 import Form from '../shared/components/Form';
 import { AuthInputsForm, authSchema } from '../shared/constants';
+import { useAuth } from '../shared/store';
+
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import * as yup from 'yup';
 
@@ -20,13 +24,35 @@ const inputs = [
 ];
 
 function Register() {
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+
+  const [error, setError] = useState(null);
+
   const onSubmit = (data) => {
-    console.log(data);
+    signup({
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+    })
+      .then(() => {
+        navigate('/');
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
     <Wrapper>
-      <Form onSubmit={onSubmit} inputs={inputs} title='Login' schema={schema} />
+      <Form
+        onSubmit={onSubmit}
+        inputs={inputs}
+        title='Signup'
+        schema={schema}
+        error={error}
+        setError={setError}
+      />
     </Wrapper>
   );
 }

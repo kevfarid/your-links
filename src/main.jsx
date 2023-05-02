@@ -8,8 +8,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './main.css';
 
-const Login = React.lazy(() => import('./features/auth/Login'));
-const Register = React.lazy(() => import('./features/auth/Register'));
+import Login from './features/auth/Login';
+import Register from './features/auth/Register';
 
 const router = createBrowserRouter([
   {
