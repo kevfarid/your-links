@@ -1,8 +1,10 @@
-import Form from 'ui/organisms/Form';
-import { useUrls } from './shared/store';
 import Link from './shared/components/Link';
 import Profile from '../ui/organisms/Profile';
 import Headaer from '../ui/organisms/Header';
+import Form from 'ui/organisms/Form';
+
+import { useUrls } from './shared/store';
+import { useAuth } from '../auth/shared/store';
 
 import { useState } from 'react';
 import { Box, Container, Paper, useMediaQuery } from '@mui/material';
@@ -28,10 +30,11 @@ const inputs = [
 ];
 
 function Links() {
-  const mediaQuery = useMediaQuery('(min-height: 900px)');
-
   const [error, setError] = useState(null);
-  const { addUrl, urls } = useUrls();
+
+  const { addUrl, removeUrl, urls } = useUrls();
+  const { logout, user } = useAuth();
+  const mediaQuery = useMediaQuery('(min-height: 900px)');
 
   const onSubmit = (data, reset) => {
     addUrl({
@@ -43,7 +46,7 @@ function Links() {
 
   return (
     <>
-      <Headaer />
+      <Headaer onLogout={logout} />
       <Container
         sx={{
           display: 'flex',
@@ -79,12 +82,12 @@ function Links() {
               justifyContent: 'center',
             }}
           >
-            <Profile />
+            <Profile user={user} />
             <Form
               showTitle={false}
               onSubmit={onSubmit}
               inputs={inputs}
-              title='Signup'
+              title='ADD'
               schema={schema}
               error={error}
               setError={setError}
@@ -92,7 +95,6 @@ function Links() {
           </Box>
           <Box
             sx={{
-              paddingX: '2rem',
               display: 'flex',
               flexDirection: 'column',
               maxHeight: mediaQuery ? '30vh' : 'auto',
@@ -103,6 +105,7 @@ function Links() {
             {urls.map((url, index) => {
               return (
                 <Link
+                  onDelete={() => removeUrl(index)}
                   key={`${url.name}-${index}`}
                   name={url.name}
                   url={url.url}

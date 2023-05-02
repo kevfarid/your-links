@@ -11,19 +11,32 @@ import './main.css';
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import Links from './features/links/Links';
+import ProtectedRoute from './core/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
     path: 'login',
-    element: <Login />,
+    element: (
+      <ProtectedRoute isPublicOnly>
+        <Login />
+      </ProtectedRoute>
+    ),
   },
   {
     path: 'register',
-    element: <Register />,
+    element: (
+      <ProtectedRoute isPublicOnly>
+        <Register />
+      </ProtectedRoute>
+    ),
   },
   {
     path: '/',
-    element: <Links />,
+    element: (
+      <ProtectedRoute>
+        <Links />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

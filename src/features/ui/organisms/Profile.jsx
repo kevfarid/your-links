@@ -1,6 +1,8 @@
 import { Avatar, Box, IconButton, Typography } from '@mui/material';
 
-export default function Profile() {
+import PropTypes from 'prop-types';
+
+export default function Profile({ user }) {
   return (
     <Box
       display='flex'
@@ -20,18 +22,25 @@ export default function Profile() {
         <img src='/icons/editar.svg' alt='delete' />
       </IconButton>
       <Avatar
-        src='/icons/avatar.svg'
+        src='https://picsum.photos/300/300'
         sx={{
           width: '4.25rem',
           height: '4.25rem',
         }}
       />
       <Typography variant='h6' component='h2' fontWeight={500}>
-        John Doe
+        {user.name}
       </Typography>
       <Typography variant='body1' component='p' fontWeight={400}>
-        John.doe@example.com
+        {user.email}
       </Typography>
     </Box>
   );
 }
+
+Profile.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+};

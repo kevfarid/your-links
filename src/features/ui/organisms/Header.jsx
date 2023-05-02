@@ -1,8 +1,9 @@
-import { Button, Paper } from '@mui/material';
+import PropTypes from 'prop-types';
+import { Box, Button } from '@mui/material';
 
-export default function Header() {
+export default function Header({ onLogout }) {
   return (
-    <Paper
+    <Box
       component='header'
       sx={{
         display: 'flex',
@@ -15,13 +16,19 @@ export default function Header() {
         position: 'sticky',
         top: 0,
         zIndex: 99,
+        backgroundColor: '#fff',
       }}
-      backgroundColor='#fff'
     >
       <img src='/logo.svg' alt='delete' width={55} />
-      <Button variant='outlined' color='primary'>
-        LOGOUT
-      </Button>
-    </Paper>
+      {onLogout && (
+        <Button variant='outlined' color='primary' onClick={onLogout}>
+          LOGOUT
+        </Button>
+      )}
+    </Box>
   );
 }
+
+Header.propTypes = {
+  onLogout: PropTypes.func,
+};

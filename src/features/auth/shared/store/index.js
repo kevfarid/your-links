@@ -23,7 +23,7 @@ export const useAuth = createStore('login', (set, get) => ({
     return Promise.resolve();
   },
   logout: () => {
-    set({ email: '', isLogged: false, token: '', isSubscribed: false });
+    set({ email: '', isLogged: false, token: '', user: {} });
     localStorage.removeItem('token');
   },
   signup: async ({ fullName, email, password }) => {

@@ -3,13 +3,22 @@ import PropTypes from 'prop-types';
 
 export default function Link({ name, url, onDelete }) {
   return (
-    <Box py='1rem' position='relative' maxWidth='21rem'>
+    <Box
+      py='1rem'
+      position='relative'
+      sx={{
+        paddingX: '2rem',
+        width: '100%',
+        borderTop: '1px solid #E0E0E0',
+        borderBottom: '1px solid #E0E0E0',
+      }}
+    >
       <IconButton
         onClick={onDelete}
         sx={{
           position: 'absolute',
-          top: '1.25rem',
-          right: 0,
+          top: '0.625rem',
+          right: '1rem',
         }}
       >
         <img src='/icons/delete.svg' alt='delete' />
